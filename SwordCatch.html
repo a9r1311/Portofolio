@@ -182,18 +182,18 @@ MiSideなんて夢のまた夢だったので、もっと実装が早くでき�
 自分が生み出すもののクオリティを上げたいなと思いました。<br>
 </p>
 
-<img src="PSword.jpg" alt="刀" class="sword-animation">
+<img src="PSword.png" alt="刀" class="sword-animation">
 
 <style>
 .sword-animation {
     position: fixed;
     /* 画面の右外（半分隠れるか、少しはみ出た位置）に固定 */
-    right: -30px;
-    top: 35%;
+    right: -90px;
+    top: 25%;
     
-    width: 300px; /* 刀の大きさ（調整してください） */
+    width: 800px; /* 刀の大きさ（調整してください） */
     height: auto;
-    z-index: 90;
+    z-index: -1;
     pointer-events: none; /* クリックを透過させる */
     
     /* 刀の「柄（持ち手）」のあたりを回転の中心にする */
@@ -212,7 +212,7 @@ MiSideなんて夢のまた夢だったので、もっと実装が早くでき�
     }
     100% {
         /* スクロール一番下：ズバッと下に振り下ろされた状態 */
-        transform: rotate(-50deg) translate(-80px, 150px); /* 誤字修正: translate(-80px, 150px) */
+        transform: rotate(-50deg) translate(40px, 150px); /* 誤字修正: translate(-80px, 150px) */
     }
 }
 </style>
