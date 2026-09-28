@@ -1,0 +1,70 @@
+<!-- 画面全体を覆う斜め線オーバーレイ（一番手前に配置、または背景として配置） -->
+<div id="diagonal-overlay"></div>
+
+<style>
+    /* 斜め線オーバーレイの基本設定 */
+    #diagonal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 999; /* 必要に応じて調整してください */
+        pointer-events: none; /* スクロールやクリックを邪魔しないようにする */
+        
+        /* 初期状態のストライプ柄（角度、色、線の太さ、間隔）の設定 */
+        /* 例として「赤色(#ff1010)の斜め線」にしています */
+        background: repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 40px,
+            #ff1010 40px,
+            #ff1010 50px /* 初期状態の線の太さは 10px (50-40) */
+        );
+        
+        /* スムーズに変化させるためのトランジション */
+        transition: background-size 0.1s ease-out;
+    }
+</style>
+
+<script>
+    // スクロール量に応じて斜め線の太さをダイナミックに変更する処理
+    window.addEventListener('scroll', function() {
+        const scrollTop = window.scrollY; // 現在のスクロール量
+        const maxScroll = 1500; // どのくらいスクロールしたら画面が完全に埋まるか（調整可能）
+        
+        // スクロール率（0から1の範囲に収める）
+        let progress = scrollTop / maxScroll;
+        if (progress > 1) progress = 1;
+        
+        // 【演出のロジック】
+        // スクロール前半（progress: 0 → 0.5）で線がどんどん太くなり画面を埋める
+        // スクロール後半（progress: 0.5 → 1.0）でさらに太くなるか、または細くなって消える
+        
+        let lineWidth;
+        let spacing = 50; // 線の間隔
+        
+        if (progress <= 0.5) {
+            // 前半：線が太くなっていく（初期10pxから最大25px、あるいは隙間を埋める）
+            // 隙間をなくして完全にベタ塗りにする計算
+            let factor = progress * 2; // 0 〜 1
+            lineWidth = 10 + (factor * 40); // 太さが変化
+        } else {
+            // 後半：さらにスクロールすると、今度は逆に線が細くなって消えていく
+            let factor = (progress - 0.5) * 2; // 0 〜 1
+            lineWidth = 50 - (factor * 50); // 太さが50から0に向かって細くなる
+        }
+
+        // CSSのグラデーションを動的に書き換える
+        const overlay = document.getElementById('diagonal-overlay');
+        overlay.style.background = `
+            repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent ${spacing - lineWidth}px,
+                #ff1010 ${spacing - lineWidth}px,
+                #ff1010 ${spacing}px
+            )
+        `;
+    });
+</script>

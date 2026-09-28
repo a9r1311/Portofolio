@@ -183,6 +183,7 @@ MiSideなんて夢のまた夢だったので、もっと実装が早くでき�
 </p>
 
 <img src="PSword.png" alt="刀" class="sword-animation">
+<img src="PSword__rev.png" alt="刀" class="sword-animation_rev">
 
 <style>
 .sword-animation {
@@ -213,6 +214,40 @@ MiSideなんて夢のまた夢だったので、もっと実装が早くでき�
     100% {
         /* スクロール一番下：ズバッと下に振り下ろされた状態 */
         transform: rotate(-50deg) translate(40px, 150px); /* 誤字修正: translate(-80px, 150px) */
+    }
+}
+</style>
+
+
+<style>
+.sword-animation_rev {
+    position: fixed;
+    /* 画面の右外（半分隠れるか、少しはみ出た位置）に固定 */
+    left: -120px;
+    top: -20%;
+    
+    width: 800px; /* 刀の大きさ（調整してください） */
+    height: auto;
+    z-index: -1;
+    pointer-events: none; /* クリックを透過させる */
+    
+    /* 刀の「柄（持ち手）」のあたりを回転の中心にする */
+    transform-origin: 80% 80%;
+
+    /* スクロール連動の設定（JS不要でスクロールに完全同期します） */
+    animation: swing-sword_rev linear;
+    animation-timeline: scroll();
+}
+
+/* スクロールが進むにつれて変化する動き（@keyframes） */
+@keyframes swing-sword_rev {
+    0% {
+        /* スクロール一番上：刀を斜めに構えている状態 */
+        transform: rotate(-40deg) translate(0, 0);
+    }
+    100% {
+        /* スクロール一番下：ズバッと下に振り下ろされた状態 */
+        transform: rotate(50deg) translate(-20px, 850px); /* 誤字修正: translate(-80px, 150px) */
     }
 }
 </style>
