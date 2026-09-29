@@ -147,46 +147,32 @@ body {
 
         .welcome-text {
             fill: none; /* 塗りつぶしなし（線だけ） */
-            stroke: #ff1010; /* 線の色（白） */
+            stroke: #f33939; /* 線の色（白） */
             stroke-width: 4; /* 線の太さ */
             stroke-linecap: round; /* 線の端を丸く */
             stroke-linejoin: round; /* 角を丸く */
             
-            /* 【ここが魔法のコード】 */
-            /* 1. 線の長さを取得して、全部の長さを「点線（dash）」にする */
-            stroke-dasharray: 2000; /* SVGの文字の総パス長より大きい値を設定 */
-            /* 2. 点線の「隙間」を線の長さ分だけずらして、最初は何も見えないようにする */
+            stroke-dasharray: 2000;
             stroke-dashoffset: 2000;
             
-            /* アニメーションの設定 */
-            /* 4秒かけて、offsetを0にする（線が描かれる） */
             animation: draw 4s ease forwards; 
-            
-            /* animation: draw 4s ease forwards infinite; */
         }
                 .welcome-text_blue {
-            fill: none; /* 塗りつぶしなし（線だけ） */
-            stroke: #06eeff; /* 線の色（白） */
-            stroke-width: 4; /* 線の太さ */
+            fill: none;
+            stroke: #06eeff;
+            stroke-width: 4;
             stroke-linecap: round; /* 線の端を丸く */
             stroke-linejoin: round; /* 角を丸く */
             
-            /* 【ここが魔法のコード】 */
-            /* 1. 線の長さを取得して、全部の長さを「点線（dash）」にする */
-            stroke-dasharray: 2000; /* SVGの文字の総パス長より大きい値を設定 */
-            /* 2. 点線の「隙間」を線の長さ分だけずらして、最初は何も見えないようにする */
+            stroke-dasharray: 2000;
             stroke-dashoffset: 2000;
             
-            /* アニメーションの設定 */
-            /* 4秒かけて、offsetを0にする（線が描かれる） */
             animation: draw 4s ease forwards; 
-            
-            /* animation: draw 4s ease forwards infinite; */
         }
 
             .welcome-text_loop {
 fill: none; 
-            stroke: #ff1010; 
+            stroke: #f33939; 
             stroke-width: 4; 
             stroke-linecap: round; 
             stroke-linejoin: round; 
@@ -194,7 +180,6 @@ fill: none;
             stroke-dasharray: 2000; 
             stroke-dashoffset: 2000; 
             
-            /* 【修正】forwards を消して infinite だけにする */
             animation: draw 4s ease infinite;
         }
                     .welcome-text_loopb {
@@ -207,7 +192,6 @@ fill: none;
             stroke-dasharray: 2000; 
             stroke-dashoffset: 2000; 
             
-            /* 【修正】forwards を消して infinite だけにする */
             animation: draw 4s ease infinite;
         }
 
@@ -218,17 +202,17 @@ fill: none;
         }
 @keyframes draw_loop {
             0% {
-                stroke-dashoffset: 2000; /* 最初は隠れている */
+                stroke-dashoffset: 2000;
             }
             50% {
-                stroke-dashoffset: 0;    /* ほぼ終わりのタイミングで描き切る */
+                stroke-dashoffset: 0;
             }
             51%
             {
                 stroke-dashoffset: 2000;
             }
             100% {
-                stroke-dashoffset: 0; /* 100%の瞬間に一瞬で初期状態に戻り、すぐ次が始まる */
+                stroke-dashoffset: 0;
             }
         }
         @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500&display=swap');
@@ -237,7 +221,7 @@ fill: none;
             font-size: 6rem; /* 文字サイズ */
             font-weight: bold;
         }
-/* 斜め線オーバーレイの基本設定 */
+
     #diagonal-overlay {
         position: fixed;
         top: 0;
@@ -247,14 +231,12 @@ fill: none;
         z-index: 999; /* 必要に応じて調整してください */
         pointer-events: none; /* スクロールやクリックを邪魔しないようにする */
         
-        /* 初期状態のストライプ柄（角度、色、線の太さ、間隔）の設定 */
-        /* 例として「赤色(#ff1010)の斜め線」にしています */
         background: repeating-linear-gradient(
             -45deg,
             transparent,
             transparent 50px,
-            #ff1010 50px,
-            #ff1010 50px /* 初期状態の線の太さは 10px (50-40) */
+            #ff1010 40px,
+            #ff1010 50px 
         );
         
         transition: background-size 0.1s ease-out;
@@ -262,10 +244,9 @@ fill: none;
     </style>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/luminous-lightbox/2.3.2/luminous.min.js">
 
-        // スクロール量に応じて斜め線の太さをダイナミックに変更する処理
     window.addEventListener('scroll', function() {
-        const scrollTop = window.scrollY; // 現在のスクロール量
-        const maxScroll = 1500; // どのくらいスクロールしたら画面が完全に埋まるか（調整可能）
+        const scrollTop = window.scrollY;
+        const maxScroll = 1500;
         
         // スクロール率（0から1の範囲に収める）
         let progress = scrollTop / maxScroll;
