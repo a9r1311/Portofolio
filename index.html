@@ -10,7 +10,7 @@
     </script>
 </head>
 
-<body style="background-color: rgb(0, 0, 0); color: white; padding-bottom: 1500px;">
+<body style="background-color: rgb(0, 0, 0); color: white; padding-bottom: 2200px;overflow-x: hidden;">
     
     <h1 style="position: absolute; top: 120x; left: 830px; color: white; margin: 0;">
         Introduction
@@ -73,6 +73,17 @@
     （Github制作後期...）
 </a>
 
+<div style="position: absolute; top: 2050px; left: 0px;width: 100%; height: 2px; background-color: #ccc; margin: 40px 0;"></div>
+
+    <h2 style="
+    color: rgb(255, 255, 255); 
+    display: inline-block; 
+    font-size: 3em; 
+    font-weight: bold; 
+    position: absolute; top: 2190px; left: 800px;
+">
+    OtherWorks
+</h2>
 <div id="intro-overlay" style="position: absolute; top: 150px; left: 200px; z-index: -1; pointer-events: none;">
     <svg class="welcome-svg" viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg">
         <text x="50" y="150" class="welcome-text">MySelf</text>
@@ -299,4 +310,118 @@ fill: none;
         `;
     });
     </script>
+
+<div class="slider-container" id="sliderContainer" style="position: absolute; top: 2420px; left: 232px;">
+    <div class="slider-track" id="sliderTrack">
+        <!-- 【1セット目】画像を配置 -->
+        <div class="card"><img src="Shoot.png"   alt="作品1"></div>
+        <div class="card"><img src="farm.png" alt="作品2"></div>
+        <div class="card"><img src="Summer.png" alt="作品3"></div>
+        <div class="card"><img src="net.png" alt="作品4"></div>
+        
+        <!-- 【2セット目】ループ用クローン（同じ画像を配置） -->
+        <div class="card"><img src="Shoot.png" alt="作品1"></div>
+        <div class="card"><img src="farm.png" alt="作品2"></div>
+        <div class="card"><img src="Summer.png" alt="作品3"></div>
+        <div class="card"><img src="net.jpg" alt="作品4"></div>
+
+    </div>
+</div>
+
+<style>
+.slider-container {
+    width: 1470px; /* 3枚分の表示幅 (400px * 3 + 40px * 2) */
+    overflow: hidden;
+}
+
+.slider-track {
+    display: flex;
+    gap: 40px;
+    will-change: transform;
+}
+
+.card {
+    min-width: 450px;
+    height: 240px;
+    background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden; /* 画像が角丸からはみ出さないようにするおまじない */
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* カードの中にある画像のサイズをカードぴったりに合わせる設定 */
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 画像が縦横比を保ったまま、カードの枠いっぱいに綺麗に収まるようにする */
+}
+</style>
+
+<script>
+class SmoothSteppedSlider {
+    constructor(containerId, trackId, options = {}) {
+        this.container = document.getElementById(containerId);
+        this.track = document.getElementById(trackId);
+        
+        this.itemWidth = options.itemWidth || 450; 
+        this.gap = options.gap || 40;              
+        this.stepSize = this.itemWidth + this.gap; 
+        this.currentIndex = 0;
+        
+        this.totalOriginalItems = 4;
+        this.maxScroll = this.stepSize * this.totalOriginalItems;
+        
+        this.intervalTime = options.intervalTime || 3000; 
+        this.animDuration = options.animDuration || 700;   
+        
+        this.currentX = 0;
+        this.targetX = 0;
+        
+        this.init();
+    }
+
+    init() {
+        this.timer = setInterval(() => {
+            this.nextStep();
+        }, this.intervalTime);
+    }
+
+    nextStep() {
+        this.currentIndex++;
+        this.targetX = -this.currentIndex * this.stepSize;
+        
+        this.animateToTarget();
+
+        if (this.currentIndex >= this.totalOriginalItems) {
+            setTimeout(() => {
+                this.track.style.transition = 'none'; 
+                this.currentIndex = 0;
+                this.currentX = 0;
+                this.targetX = 0;
+                this.track.style.transform = `translateX(0px)`;
+                
+                void this.track.offsetHeight;
+                this.track.style.transition = `transform ${this.animDuration}ms cubic-bezier(0.25, 1, 0.5, 1)`;
+            }, this.animDuration);
+        }
+    }
+
+    animateToTarget() {
+        this.track.style.transition = `transform ${this.animDuration}ms cubic-bezier(0.25, 1, 0.5, 1)`;
+        this.track.style.transform = `translateX(${this.targetX}px)`;
+        this.currentX = this.targetX;
+    }
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    new SmoothSteppedSlider('sliderContainer', 'sliderTrack', {
+        intervalTime: 3000, 
+        animDuration: 700    
+    });
+});
+</script>
 </html>
