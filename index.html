@@ -422,16 +422,39 @@ fill: none;
     
     <!-- 上段：カード（画像・動画）のトラック -->
     <div class="slider-track" id="sliderTrack">
-        <div class="card"><img src="farm.png" alt="作品1"></div>
-        <div class="card"><img src="Shoot.png" alt="作品2"></div>
-        <div class="card"><img src="Summer.png" alt="作品3"></div>
-        <div class="card"><img src="net.png" alt="作品4"></div>
-        
-        <!-- ループ用クローン -->
-        <div class="card"><img src="farm.png" alt="作品1"></div>
-        <div class="card"><img src="Shoot.png" alt="作品2"></div>
-        <div class="card"><img src="Summer.png" alt="作品3"></div>
-        <div class="card"><img src="net.png" alt="作品4"></div>
+        <div class="card">
+            <a href="farm.png" class="zoom-image">
+            <img src="farm.png" alt="作品1"></div></a>
+        <div class="card">
+            <a href="Shoot.png" class="zoom-image">
+            <img src="Shoot.png" alt="作品2"></div></a>
+        <div class="card">
+            <a href="Summer.png" class="zoom-image">
+            <img src="Summer.png" alt="作品3"></div></a>
+        <div class="card">
+            <a href="Now.png" class="zoom-image">
+            <img src="Now.png" alt="作品4"></div></a>
+        <div class="card">
+            <a href="net.png" class="zoom-image">
+            <img src="net.png" alt="作品5"></div></a>
+
+            <!-- ループ用クローン -->
+        <div class="card">
+            <a href="farm.png" class="zoom-image">
+            <img src="farm.png" alt="作品1"></div></a>
+        <div class="card">
+            <a href="Shoot.png" class="zoom-image">
+            <img src="Shoot.png" alt="作品2"></div></a>
+        <div class="card">
+            <a href="Summer.png" class="zoom-image">
+            <img src="Summer.png" alt="作品3"></div></a>
+        <div class="card">
+            <a href="Now.png" class="zoom-image">
+            <img src="Now.png" alt="作品4"></div></a>
+        <div class="card">
+            <a href="net.png" class="zoom-image">
+            <img src="net.png" alt="作品5"></div></a>
+
     </div>
 
     <!-- 下段：テキストのトラック（独立してカードと同じ幅・間隔に設定） -->
@@ -445,9 +468,13 @@ fill: none;
         <div class="card-text-box"><p>制作時期1年次9月<br>個人制作</p>
            <a href="https://github.com/M-Kousei/SummerHomework/tree/master/Assets" target="_blank" rel="noopener noreferrer" class="card-github-link">（Github...）</a>
         </div>
+        <div class="card-text-box"><p>制作時期3年次6月~制作中<br>6人制作<br>役割:エンジニア<br>担当:敵挙動<br>
+            <a href="https://github.com/ArukuHito0/Career-Quest/tree/main/Assets/Script/Enemy" target="_blank" rel="noopener noreferrer" class="card-github-link">（Github...）</a>
+        </div>
         <div class="card-text-box"><p>制作時期3年次7月<br>個人制作</p>
             <a href="https://github.com/a9r1311/InternetPractice" target="_blank" rel="noopener noreferrer" class="card-github-link">（Github...）</a>
         </div>
+
 
         <!-- ループ用クローン -->
         <div class="card-text-box"><p>制作時期1年次8月~11月<br>6人制作<br>役割:プロジェクトリーダー・PM<br>・ディレクター・プログラマ</p>
@@ -459,9 +486,13 @@ fill: none;
         <div class="card-text-box"><p>制作時期1年次9月<br>個人制作</p>
            <a href="https://github.com/M-Kousei/SummerHomework/tree/master/Assets" target="_blank" rel="noopener noreferrer" class="card-github-link">（Github...）</a>
         </div>
+        <div class="card-text-box"><p>制作時期3年次6月~制作中<br>6人制作</p>役割:エンジニア/担当:敵挙動<br>
+            <a href="https://github.com/ArukuHito0/Career-Quest/tree/main/Assets/Script/Enemy" target="_blank" rel="noopener noreferrer" class="card-github-link">（Github...）</a>
+        </div>
         <div class="card-text-box"><p>制作時期3年次7月<br>個人制作</p>
             <a href="https://github.com/a9r1311/InternetPractice" target="_blank" rel="noopener noreferrer" class="card-github-link">（Github...）</a>
         </div>
+
     </div>
 
 </div>
@@ -543,7 +574,7 @@ text {
 
 /* --- スライダー関連のCSS --- */
 .slider-container {
-    width: 1470px; /* 3枚分の表示幅 (450*3 + 40*2 = 1430px あたりを想定して調整可能) */
+    width: 1455px; /* 3枚分の表示幅 (450*3 + 40*2 = 1430px あたりを想定して調整可能) */
     overflow: hidden;
 }
 
@@ -561,9 +592,9 @@ text {
 }
 
 .card {
-    min-width: 450px;
-    width: 450px;
-    height: 240px;
+    min-width: 445px;
+    width: 445px;
+    height: 230px;
     background: #ffffff;
     border-radius: 10px;
     overflow: hidden;
@@ -581,8 +612,8 @@ text {
 }
 
 .card-text-box {
-    min-width: 450px;
-    width: 450px;
+    min-width: 445px;
+    width: 445px;
     flex-shrink: 0;
     text-align: left;
     color: #ffffff;
@@ -643,12 +674,12 @@ class SmoothSteppedSlider {
         this.track = document.getElementById(trackId);
         this.textTrack = document.getElementById(textTrackId); // テキスト側も取得
         
-        this.itemWidth = options.itemWidth || 450; 
+        this.itemWidth = options.itemWidth || 445; 
         this.gap = options.gap || 40;                           
         this.stepSize = this.itemWidth + this.gap; 
         this.currentIndex = 0;
         
-        this.totalOriginalItems = 4; // 元の画像の枚数
+        this.totalOriginalItems = 5; // 元の画像の枚数
         
         this.intervalTime = options.intervalTime || 3000; 
         this.animDuration = options.animDuration || 700;   
