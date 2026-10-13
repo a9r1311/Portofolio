@@ -11,12 +11,41 @@
 </head>
 <body style="background-color: black; color: white; padding-bottom: 3200px;">
     <h1 style="text-align: center;">ぶっ飛び鬼ごっこ</h1>
+    <div class="page-transition-overlay is-active" id="pageTransitionOverlay"></div>
 <style>
         body {
             /* 'your-cursor.png' の部分をご自身の画像ファイル名に書き換えてください */
             cursor: url('Rocket_Cursor.png'), auto;
         }
+
+        .page-transition-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgb(54, 0, 0);
+            z-index: 99999;
+            pointer-events: none;
+            transform-origin: left;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: scaleX(1);
+        }
+
+        .page-transition-overlay:not(.is-active) {
+            transform: scaleX(0);
+        }
 </style>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const overlay = document.getElementById('pageTransitionOverlay');
+        if (overlay) {
+            setTimeout(() => {
+                overlay.classList.remove('is-active');
+            }, 50);
+        }
+    });
+</script>
     <video src="Title_Rocket.mp4" autoplay loop muted playsinline controls style="position: absolute; top: 140px; left: 150px; width: 870px; border-radius: 10px;z-index: 2;">
     お使いのブラウザは動画タグに対応していません。
 </video>
@@ -34,7 +63,7 @@
 </h2>
 
 <p style="
-    background-color: #b13d3d; 
+    background-color: rgb(177, 61, 61); 
     color: rgb(255, 255, 255); 
     display: inline-block; 
     padding: 20px 40px; 

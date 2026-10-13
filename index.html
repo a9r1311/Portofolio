@@ -19,6 +19,7 @@
 <a href="MySelf.html" class = "Myself-btn">
     自己PR
 </a>
+
 <style>
 .Myself-btn {
     position: absolute;
@@ -40,9 +41,8 @@
     box-shadow: 0px 3px 12px rgba(247, 38, 38, 0.9);
 }
 </style>
-
 <div style="position: absolute; top: 515px; left: 0px;width: 100%; height: 2px; background-color: #ccc; margin: 40px 0;"></div>
-
+    
     <h2 style="
     color: rgb(255, 255, 255); 
     display: inline-block; 
@@ -56,13 +56,14 @@
 <video src="RocketTagSingboard.mp4" autoplay loop muted playsinline style="position: absolute; top: 830px; left: 240px; width: 600px; border-radius: 10px;">
     お使いのブラウザは動画に対応していません。
 </video>
-<a href="RocketTag.html" class="rocket-btn">
+<a href="RocketTag.html" class="rocket-btn" id = "sweepBtn">
     ロケット鬼ごっこ
 </a>
+
+<div class="Rpage-transition-overlay" id="pageTransitionOverlay"></div>
 <a href="https://github.com/ayumuOhara/Rocket_Tag/tree/main/Rocket_Tag/Assets/Scripts" target="_blank" rel="noopener noreferrer"style="position: absolute; top: 1270px; left: 650px; padding: 1px 1px; background-color: rgb(0, 0, 0); color: rgba(255, 255, 255, 0.27); text-decoration: underline; border-radius: 5px; font-weight: bold;">
     （Github...）
 </a>
-
 <style>
 .rocket-btn {
     position: absolute;
@@ -77,21 +78,162 @@
     box-shadow: 0px 4px 10px rgb(247, 38, 38);
     transition: background-color 0.27s ease, box-shadow 0.27s ease;
     cursor: url('Rocket_Cursor.png') 4 4, pointer;
+    overflow: hidden;
+    z-index: 1;
 }
-
 .rocket-btn:hover {
     background-color: #ebd9d9;
     box-shadow: 0px 3px 8px rgba(247, 38, 38, 0.9);
 }
+.rocket-btn .btn-text {
+    position: relative;
+    z-index: 2;
+    transition: color 0.3s ease;
+}
+.rocket-btn.is-animating {
+    color: #ffffff;
+}
+.rocket-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(247, 38, 38);
+    z-index: 1;
+    transform: scaleX(0);
+    transform-origin: right;
+}
+.rocket-btn.is-animating::after {
+    animation: redSweepCycle 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+@keyframes SweepCycle {
+    0% {
+        transform: scaleX(0);
+        transform-origin: right;
+    }
+    45% {
+        transform: scaleX(1);
+        transform-origin: right;
+    }
+    50% {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+    100% {
+        transform: scaleX(0);
+        transform-origin: left;
+    }
+}
+.Rpage-transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(54, 0, 0);
+    z-index: 777;
+    pointer-events: none;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.Rpage-transition-overlay.is-active {
+    transform: scaleX(1);
+    pointer-events: auto;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const sweepBtn = document.getElementById('sweepBtn');
+
+if (sweepBtn) {
+        sweepBtn.addEventListener('click', (e) => {
+            if (sweepBtn.classList.contains('is-animating')) return;
+            e.preventDefault();
+            sweepBtn.classList.add('is-animating');
+
+            setTimeout(() => {
+                window.location.href = sweepBtn.href;
+            }, 1200);
+        });
+    }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const sweepBtn = document.getElementById('sweepBtn');
+    const overlay = document.getElementById('pageTransitionOverlay');
+
+    if (sweepBtn && overlay) {
+        sweepBtn.addEventListener('click', (e) => {
+            if (overlay.classList.contains('is-active')) return;
+            e.preventDefault();
+            overlay.classList.add('is-active');
+
+            setTimeout(() => {
+                window.location.href = sweepBtn.href;
+            }, 600);
+        });
+    }
+
+    const lsweepBtn = document.getElementById('LsweepBtn');
+    const loverlay = document.getElementById('LpageTransitionOverlay');
+
+    if (lsweepBtn && loverlay) {
+        lsweepBtn.addEventListener('click', (e) => {
+            if (loverlay.classList.contains('is-active')) return;
+            e.preventDefault();
+            loverlay.classList.add('is-active');
+
+            setTimeout(() => {
+                window.location.href = lsweepBtn.href;
+            }, 600);
+        });
+    }
+    const asweepBtn = document.getElementById('AsweepBtn');
+    const aoverlay = document.getElementById('ApageTransitionOverlay');
+
+    if (asweepBtn && aoverlay) {
+        asweepBtn.addEventListener('click', (e) => {
+            if (aoverlay.classList.contains('is-active')) return;
+            e.preventDefault();
+            aoverlay.classList.add('is-active');
+
+            setTimeout(() => {
+                window.location.href = asweepBtn.href;
+            }, 600);
+        });
+    }
+
+        const ssweepBtn = document.getElementById('SsweepBtn');
+    const soverlay = document.getElementById('SpageTransitionOverlay');
+
+    if (ssweepBtn && soverlay) {
+        ssweepBtn.addEventListener('click', (e) => {
+            if (soverlay.classList.contains('is-active')) return;
+            e.preventDefault();
+            soverlay.classList.add('is-active');
+
+            setTimeout(() => {
+                window.location.href = ssweepBtn.href;
+            }, 600);
+        });
+    }
+});
+</script>
 </style>
 
 
 <video src="Library_Signboard.mp4" autoplay loop muted playsinline style="position: absolute; top: 830px; left: 1010px; width: 600px; border-radius: 10px; z-index: 2;">
     お使いのブラウザは動画タグに対応していません。
 </video>
-    <a href="LibertyLibrary.html"class = "Library-btn";>
+    <a href="LibertyLibrary.html"class = "Library-btn"; id="LsweepBtn">
     TheCircularLibraly
 </a>
+<div class="Lpage-transition-overlay" id="LpageTransitionOverlay"></div>
 <style>
 .Library-btn {
     position: absolute;
@@ -112,6 +254,65 @@
     background-color: rgb(226, 226, 212);
     box-shadow: 0px 3px 8px rgba(255, 217, 1, 0.9);
 }
+.Library-btn .btn-text {
+    position: relative;
+    z-index: 2;
+    transition: color 0.3s ease;
+}
+.Library-btn.is-animating {
+    color: #ffffff;
+}
+.Library-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255, 217, 1);
+    z-index: 1;
+    transform: scaleX(0);
+    transform-origin: right;
+}
+.Library-btn.is-animating::after {
+    animation: redSweepCycle 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+@keyframes SweepCycle {
+    0% {
+        transform: scaleX(0);
+        transform-origin: right;
+    }
+    45% {
+        transform: scaleX(1);
+        transform-origin: right;
+    }
+    50% {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+    100% {
+        transform: scaleX(0);
+        transform-origin: left;
+    }
+}
+.Lpage-transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(23, 51, 4);
+    z-index: 777;
+    pointer-events: none;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.Lpage-transition-overlay.is-active {
+    transform: scaleX(1);
+    pointer-events: auto;
+}
 </style>
 
 <a href="https://github.com/kmm2459318/The-Climb/tree/main/The_Climb/Assets/Matsuyama/Script"target="_blank" rel="noopener noreferrer" style="position: absolute; top: 1270px; left: 1445px; padding: 1px 1px; background-color: rgb(0, 0, 0); color: rgba(255, 255, 255, 0.27); text-decoration: underline; border-radius: 5px; font-weight: bold;">
@@ -121,9 +322,10 @@
 <video src="AlongCollision_Signboard.mp4" autoplay loop muted playsinline style="position: absolute; top: 1440px; left: 240px; width: 600px; border-radius: 10px;">
     お使いのブラウザは動画タグに対応していません。
 </video>
-    <a href="AlongCollision.html"class = "Along-btn">
+    <a href="AlongCollision.html"class = "Along-btn" id="AsweepBtn">
     AlongCollision
 </a>
+<div class="Apage-transition-overlay" id="ApageTransitionOverlay"></div>
 <style>
 .Along-btn {
     position: absolute;
@@ -144,6 +346,65 @@
     background-color: rgb(191, 199, 219);
     box-shadow: 0px 3px 8px rgba(10, 75, 255, 0.9);
 }
+.Along-btn .btn-text {
+    position: relative;
+    z-index: 2;
+    transition: color 0.3s ease;
+}
+.Along-btn.is-animating {
+    color: #ffffff;
+}
+.Along-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(3, 19, 63);
+    z-index: 1;
+    transform: scaleX(0);
+    transform-origin: right;
+}
+.Along-btn.is-animating::after {
+    animation: redSweepCycle 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+@keyframes SweepCycle {
+    0% {
+        transform: scaleX(0);
+        transform-origin: right;
+    }
+    45% {
+        transform: scaleX(1);
+        transform-origin: right;
+    }
+    50% {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+    100% {
+        transform: scaleX(0);
+        transform-origin: left;
+    }
+}
+.Apage-transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(3, 19, 63);
+    z-index: 777;
+    pointer-events: none;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.Apage-transition-overlay.is-active {
+    transform: scaleX(1);
+    pointer-events: auto;
+}
 </style>
 
 <a href="https://github.com/a9r1311/OhajikiKanojo/tree/main/Assets/Script"target="_blank" rel="noopener noreferrer" style="position: absolute; top: 1870px; left: 640px; padding: 1px 1px; background-color: rgb(0, 0, 0); color: rgba(255, 255, 255, 0.27); text-decoration: underline; border-radius: 5px; font-weight: bold;">
@@ -151,9 +412,10 @@
 </a>
 
 <video src="SwordCatch_Signboard.mp4" autoplay loop muted playsinline style="position: absolute; top: 1440px; left: 1010px; width: 600px; border-radius: 10px;z-index: 2;"></video>
-    <a href="SwordCatch.html" class ="Sword-btn";>
+    <a href="SwordCatch.html" class ="Sword-btn"; id="SsweepBtn">
     白刃取り
 </a>
+<div class="Spage-transition-overlay" id="SpageTransitionOverlay"></div>
 <style>
 .Sword-btn {
     position: absolute;
@@ -173,6 +435,65 @@
 .Sword-btn:hover {
     background-color: rgb(226, 222, 228);
     box-shadow: 0px 3px 8px rgba(195, 0, 255, 0.9);
+}
+.Sword-btn .btn-text {
+    position: relative;
+    z-index: 2;
+    transition: color 0.3s ease;
+}
+.Sword-btn.is-animating {
+    color: #ffffff;
+}
+.Sword-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(195, 0, 255);
+    z-index: 1;
+    transform: scaleX(0);
+    transform-origin: right;
+}
+.Sword-btn.is-animating::after {
+    animation: redSweepCycle 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+@keyframes SweepCycle {
+    0% {
+        transform: scaleX(0);
+        transform-origin: right;
+    }
+    45% {
+        transform: scaleX(1);
+        transform-origin: right;
+    }
+    50% {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+    100% {
+        transform: scaleX(0);
+        transform-origin: left;
+    }
+}
+.Spage-transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(58, 6, 73);
+    z-index: 777;
+    pointer-events: none;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.Spage-transition-overlay.is-active {
+    transform: scaleX(1);
+    pointer-events: auto;
 }
 </style>
 

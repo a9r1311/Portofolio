@@ -11,13 +11,41 @@
 </head>
 <body style="background-color: black; color: white; overflow-x: hidden; padding-bottom: 3900px;">
     <h1 style="text-align: center;">AlongCollision</h1>
+    <div class="page-transition-overlay is-active" id="pageTransitionOverlay"></div>
     <style>
         body {
             /* 'your-cursor.png' の部分をご自身の画像ファイル名に書き換えてください */
             cursor: url('MineCursor.png'), auto;
         }
+        .page-transition-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgb(3, 19, 63);
+            z-index: 99999;
+            pointer-events: none;
+            transform-origin: left;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: scaleX(1);
+        }
+
+        .page-transition-overlay:not(.is-active) {
+            transform: scaleX(0);
+        }
 </style>
-    <video src="Title_Along.mp4" autoplay loop muted playsinline controls style="position: absolute; top: 140px; left: 110px; width: 895px; border-radius: 10px;">
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const overlay = document.getElementById('pageTransitionOverlay');
+        if (overlay) {
+            setTimeout(() => {
+                overlay.classList.remove('is-active');
+            }, 50);
+        }
+    });
+</script>   
+<video src="Title_Along.mp4" autoplay loop muted playsinline controls style="position: absolute; top: 140px; left: 110px; width: 895px; border-radius: 10px;">
     お使いのブラウザは動画タグに対応していません。
 </video>
 
