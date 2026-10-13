@@ -45,6 +45,23 @@
             }, 50);
         }
     });
+    window.addEventListener('pageshow', (event) => {
+    // event.persisted が true の場合、ブラウザのキャッシュ（BFCache）から復元されたことを示します
+    if (event.persisted) {
+        const overlays = document.querySelectorAll(
+            '.Rpage-transition-overlay, .Lpage-transition-overlay, .Apage-transition-overlay, .Spage-transition-overlay'
+        );
+        overlays.forEach(overlay => {
+            overlay.classList.remove('is-active');
+        });
+        
+        // ボタン側の animating クラスも外す場合
+        const animatingBtns = document.querySelectorAll('.is-animating');
+        animatingBtns.forEach(btn => {
+            btn.classList.remove('is-animating');
+        });
+    }
+});
 </script>  
     <video src="Title_SwordCatch.mp4" autoplay loop muted playsinline controls style="position: absolute; top: 140px; left: 150px; width: 870px; border-radius: 10px;">
     お使いのブラウザは動画タグに対応していません。
